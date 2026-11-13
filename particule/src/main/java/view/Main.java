@@ -14,7 +14,6 @@ import javafx.stage.Stage;
 import model.ParticleFactory;
 import model.World;
 
-/** Full-screen window: forwards the keyboard and the elapsed time to the model, then redraws. */
 public class Main extends Application {
 
     private static final int PARTICLE_COUNT = 150;
@@ -40,7 +39,7 @@ public class Main extends Application {
 
         stage.setScene(scene);
         stage.setFullScreenExitHint("");
-        stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH); // Escape quits instead of leaving full screen
+        stage.setFullScreenExitKeyCombination(KeyCombination.NO_MATCH);
         stage.setFullScreen(true);
         stage.show();
 

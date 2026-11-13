@@ -1,6 +1,5 @@
 package model;
 
-/** Color of a particle as red / green / blue (0 to 255). An immutable value: the view translates it. */
 public final class ParticleColor {
     private final int red;
     private final int green;
