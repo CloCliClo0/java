@@ -5,10 +5,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Random;
 
-/**
- * Creates the starting particles: free spot, random direction and color, fixed speed.
- * The random generator is given from outside, so a draw can be replayed with a seed.
- */
 public final class ParticleFactory {
 
     private static final double INITIAL_SPEED = 150.0;

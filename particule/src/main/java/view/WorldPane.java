@@ -9,7 +9,6 @@ import model.Body;
 import model.ParticleColor;
 import model.World;
 
-/** Shows one circle per particle and copies their position at every frame. Decides nothing. */
 final class WorldPane extends Pane {
 
     private final List<Sprite> sprites;
@@ -24,7 +23,6 @@ final class WorldPane extends Pane {
         sprites.forEach(Sprite::refresh);
     }
 
-    /** Links a particle of the model to the circle that represents it on screen. */
     private record Sprite(Body body, Circle circle) {
 
         Sprite(Body body) {

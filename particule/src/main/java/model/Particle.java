@@ -2,13 +2,6 @@ package model;
 
 import java.util.Objects;
 
-/**
- * A disc of fixed radius that moves in a straight line and bounces off the walls
- * and off other particles. All particles have the same mass.
- *
- * Bounces only flip or exchange velocity components, so they neither create
- * nor destroy kinetic energy.
- */
 public final class Particle implements Body {
 
     private static final double RADIUS = 8.0;
@@ -55,18 +48,15 @@ public final class Particle implements Body {
         return color;
     }
 
-    /** Squared speed; proportional to the kinetic energy since all masses are equal. */
     public double speedSquared() {
         return velocityX * velocityX + velocityY * velocityY;
     }
 
-    /** Moves the particle in a straight line for {@code seconds} seconds. */
     public void advance(double seconds) {
         x += velocityX * seconds;
         y += velocityY * seconds;
     }
 
-    /** True if the two discs touch or overlap. */
     public boolean touches(Particle other) {
         double dx = other.x - x;
         double dy = other.y - y;
@@ -74,11 +64,6 @@ public final class Particle implements Body {
         return other != this && dx * dx + dy * dy <= diameter * diameter;
     }
 
-    /**
-     * If the two particles touch, pushes them apart and, if they were getting closer,
-     * bounces their velocities along the line between their centers.
-     * With equal masses, an elastic collision simply exchanges the normal components.
-     */
     public void collideWith(Particle other) {
         if (!touches(other)) {
             return;
@@ -87,11 +72,9 @@ public final class Particle implements Body {
         double dy = other.y - y;
         double distance = Math.hypot(dx, dy);
 
-        // Same center: the direction of the impact is undefined, so pick one.
         double normalX = distance > 0.0 ? dx / distance : 1.0;
         double normalY = distance > 0.0 ? dy / distance : 0.0;
 
-        // Speed at which this particle approaches the other one along the normal.
         double closingSpeed = (velocityX - other.velocityX) * normalX
                 + (velocityY - other.velocityY) * normalY;
         if (closingSpeed > 0.0) {
@@ -101,7 +84,6 @@ public final class Particle implements Body {
             other.velocityY += closingSpeed * normalY;
         }
 
-        // Separate the discs so they do not stay stuck together.
         double push = (2.0 * RADIUS - distance) / 2.0;
         x -= normalX * push;
         y -= normalY * push;
@@ -109,7 +91,6 @@ public final class Particle implements Body {
         other.y += normalY * push;
     }
 
-    /** Puts the particle back inside [0, width] x [0, height] and turns its velocity inward. */
     public void bounceOnWalls(double width, double height) {
         if (x < RADIUS) {
             x = RADIUS;
@@ -127,7 +108,6 @@ public final class Particle implements Body {
         }
     }
 
-    /** True if the whole disc is inside [0, width] x [0, height]. */
     public boolean isInside(double width, double height) {
         return x >= RADIUS && x <= width - RADIUS && y >= RADIUS && y <= height - RADIUS;
     }
