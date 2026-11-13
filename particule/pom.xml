@@ -15,7 +15,6 @@
     </properties>
 
     <dependencies>
-        <!-- javafx-graphics is enough: the application uses no control -->
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-graphics</artifactId>
